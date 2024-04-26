@@ -1,0 +1,96 @@
+class User {
+  private name: string;
+  private login: string;
+  private password: string;
+  private grade: any;
+  static count: number = 0;
+
+constructor(name: string, login: string, password: string, grade: number){
+  this.name = name;
+  this.login = login;
+  this.password = password;
+  this.grade = grade;
+}
+
+get name() :string{
+  return this.name;
+}
+
+set name(value: string){
+  this.name = value;
+}
+
+get login(): string{
+return this.login;
+}
+
+
+get password():string {
+  return "";
+}
+
+
+showInfo(): void {
+        console.log(`Name: ${this.name}, Login: ${this.login}`);
+    }
+
+    a(other: User): boolean {
+        return this._grade === other.grade;
+    }
+    b(other: User): boolean { 
+        return this._grade < other.grade;
+    }
+
+    c(other: User): boolean {
+        return this._grade > other.grade;
+    }
+}
+
+
+
+class SuperUser extends User {
+    private role: string;
+
+    constructor(name: string, login: string, password: string, role: string, grade: number) {
+        super(name, login, password, grade);
+        this.role = role;
+    }
+
+    get role(): string {
+        return this.role;
+    }
+
+    set role(value: string) {
+        this.role = value;
+    }
+
+    showInfo(): void {
+        console.log(`Name: ${this.name}, Login: ${this.login}, Role: ${this.role}`);
+    }
+}
+
+const user1 = new User('The First', 'first', '1234', 3);
+const user2 = new  User('The Second',  'second', '5678', 2);
+const user3 = new User('The Third',  'third', '8523', 3);
+const admin = new SuperUser('The Fourth', 'fourth', '0000', 'admin', 5);
+
+user1.showInfo( );
+admin.showInfo( );
+
+
+
+console.log(`Всего обычных пользователей: ${User.count}`);
+
+console.log(`Всего пользователей с правами покруче: ${SuperUser.count}`);
+
+
+console.log(user1.a (user2));
+
+console.log(admin.b ( user3));
+console.log(user1.c (user3));
+
+user3.name = 'The Third';
+console.log(user3.name);
+console.log(user2.password);
+console.log(user2.login);
+ 
